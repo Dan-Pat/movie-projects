@@ -2,13 +2,13 @@
 
 
 const IMDB_URL = `https://imdb-api.com/API/AdvancedSearch/${IMDB_KEY}?locations=Texas`;
-const GLITCH_URL = 'https://codeup-restful-example.glitch.me/reviews';
+const GLITCH_URL = 'https://grape-hill-leo.glitch.me/movies';
 const options = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify(reviewObj),
+    body: JSON.stringify(),
 };
 
 /* INVOKE IMDB FETCH FUNCTION */
@@ -22,9 +22,16 @@ function imdbFetch(url) {
         .catch(err => console.error(err));
 }
 
+/* ADDING A MOVIE FETCH */
+fetch(GLITCH_URL)
+    .then(response => response.json())
+    .then(response => console.log(response)) /* review was created successfully */
+    .catch(error => console.error(error)); /* handle errors */
+
+
 /* SELECT DIV FOR CARD POPULATION */
 function populateBody(dataIn) {
-    console.log(dataIn.results[0].title);
+    console.log(dataIn);
 
     $('#pop-body').html(createMovieCards(dataIn));
 }
@@ -65,8 +72,3 @@ function cardForge(dataIn) {
     return html;
 }
 
-
-/* ADDING A MOVIE FETCH */
-fetch(GLITCH_URL, options)
-    .then(response => console.log(response)) /* review was created successfully */
-    .catch(error => console.error(error)); /* handle errors */
