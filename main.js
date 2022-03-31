@@ -1,9 +1,11 @@
 "use strict"
 
 /* Main Fetch Function */
-// function getUserLastPushEvent(username) {
+// function coolFunc(dataIn) {
 //
 // }
+
+
 
 
 let url = `https://imdb-api.com/API/AdvancedSearch/${IMDB_KEY}?locations=Texas`;
