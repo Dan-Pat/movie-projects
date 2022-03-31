@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
 
+    <!-- KEYS JS -->
+    <script src="keys.js"></script>
+
     <!-- JQUERY 3 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <!-- KEYS JS -->
-    <script src="keys.js"></script>
 
     <!-- CUSTOM JS -->
     <script src="main.js"></script>
@@ -21,6 +21,11 @@
 </head>
 <body>
 <main>
+    <form method="POST" action="https://grape-hill-leo?path=README.md%3A1%3A0.glitch.me/movies">
+        <input id="add-movie-input" name="add-movie-input" type="text">
+        <button id="add-movie-button" type="submit">add movie</button>
+    </form>
+
     <div id="pop-body">
 
     </div>
