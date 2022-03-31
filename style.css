@@ -1,0 +1,17 @@
+body {
+    width: 100%;
+}
+
+main {
+    width: 80%;
+}
+
+#card-parent {
+    width: 100%;
+    border: 5px solid #000000;
+    margin: 20px;
+}
+
+img {
+    width: 200px;
+}
