@@ -2,13 +2,8 @@
 
 const IMDB_URL = `https://imdb-api.com/API/AdvancedSearch/${IMDB_KEY}?locations=Texas`;
 const GLITCH_URL = 'https://grape-hill-leo.glitch.me/movies';
-// const options = {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(),
-// };
+
+renderPostForm();
 
 /* INVOKE IMDB & GLITCH FETCH FUNCTIONS */
 imdbFetch(IMDB_URL);
@@ -60,18 +55,9 @@ function createImdbCards(dataIn) {
 
 /* ITERATE THROUGH GLITCH OBJECTS */
 function createGlitchCards(dataIn) {
-
-    // console.log(dataIn);
-
-    let html = '<div>';
-
-    for (let i = 0; i < 5; i++) {
-        html += glitchCardForge(dataIn[i]);
-    }
-
-    html += '</div>';
-
-    return html;
+    return dataIn.map((movie) => {
+        return glitchCardForge(movie)
+    }).join('');
 }
 
 /* CREATE IMDB CARDS */
@@ -79,9 +65,7 @@ function createGlitchCards(dataIn) {
 // language=HTML
 function imdbCardForge(dataIn) {
 
-    let html = '';
-
-    html += `
+    return `
         <div id="card-parent" class="cards row col-3">
             <h5>Movie Name: ${dataIn.title}</h5>
             <div id="p-container" class="col-4">
@@ -91,11 +75,7 @@ function imdbCardForge(dataIn) {
                 <li class="list-item">Rating: ${dataIn.imDbRating}</li>
                 <li>Genre: ${dataIn.genres}</li>
             </ul>
-            <div>
-            </div>
         </div>`
-
-    return html;
 }
 
 /* CREATE IMDB CARDS */
@@ -103,9 +83,7 @@ function imdbCardForge(dataIn) {
 // language=HTML
 function glitchCardForge(dataIn) {
 
-    let html = '';
-
-    html += `
+    return `
         <div id="card-parent" class="cards row col-3">
             <h5>Movie Name: ${dataIn.title}</h5>
             <div id="p-container" class="col-4">
@@ -115,9 +93,66 @@ function glitchCardForge(dataIn) {
                 <li class="list-item">Rating: ${dataIn.rating}</li>
                 <li>Genre: ${dataIn.genre}</li>
             </ul>
-            <div>
+            <a href="#actors" class="edit-button" data-id=${dataIn.id} type="button">edit movie</a>
+            <button data-id=${dataIn.id} type='button' class='delete-button'>delete</button>
+        </div>`
+}
+
+//language=HTML
+function renderPostForm() {
+    let postForm = `
+        <div>
+            <div class="row m-3" style="max-width: 50%">
+                <input class="col-6 m-2" type="text" id="actors" placeholder="actors">
+                <input class="col-6 m-2" type="text" id="director" placeholder="director">
+                <input class="col-6 m-2" type="text" id="genre" placeholder="genre">
+                <input class="col-6 m-2" type="text" id="plot" placeholder="plot">
+                <input class="col-6 m-2" type="text" id="poster" placeholder="poster">
+                <input class="col-6 m-2" type="text" id="rating" placeholder="rating">
+                <input class="col-6 m-2" type="text" id="title" placeholder="title">
+                <input class="col-6 m-2" type="text" id="year" placeholder="year">
+                <button id="btn-submit-movie" type="button">add movie</button>
+                <button id="btn-edit-movie" type="button">edit movie</button>
             </div>
         </div>`
 
-    return html;
+    $('body').prepend(postForm);
+    $('#btn-submit-movie').click(function () {
+        let newMovie = {
+            actors: $('#actors').val(),
+            director: $('#director').val(),
+            genre: $('#genre').val(),
+            plot: $('#plot').val(),
+            poster: $('#poster').val(),
+            rating: $('#rating').val(),
+            title: $('#title').val(),
+            year: $('#year').val()
+        }
+        fetch(GLITCH_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newMovie)
+        })
+            .then(rez => rez.json())
+            .then(data => data)
+            .catch(err => console.log(err));
+    })
+
+    $('#edit-movie').click(function () {
+            let editMovie = {
+                title: $('#btn-edit-movie').val(),
+            }
+
+
+        }
+    )
+    $(document).on('click', '.delete-button', function () {
+
+        fetch(`${GLITCH_URL}/${$(this).attr('data-id')}`, {method: 'DELETE'})
+            .then(rez => rez.json())
+            .catch(err => console.log(err));
+    })
 }
+
