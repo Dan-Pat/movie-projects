@@ -1,48 +1,56 @@
 "use strict";
 
-
 const IMDB_URL = `https://imdb-api.com/API/AdvancedSearch/${IMDB_KEY}?locations=Texas`;
 const GLITCH_URL = 'https://grape-hill-leo.glitch.me/movies';
-const options = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(),
-};
+// const options = {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(),
+// };
 
-/* INVOKE IMDB FETCH FUNCTION */
+/* INVOKE IMDB & GLITCH FETCH FUNCTIONS */
 imdbFetch(IMDB_URL);
+glitchFetch(GLITCH_URL);
 
-/* Main Fetch Function */
-function imdbFetch(url) {
-    fetch(url)
+/* PING IMDB API */
+function imdbFetch(imdbObject) {
+    fetch(imdbObject)
         .then(response => response.json())
         .then(response => populateBody(response))
         .catch(err => console.error(err));
 }
 
-/* ADDING A MOVIE FETCH */
-fetch(GLITCH_URL)
-    .then(response => response.json())
-    .then(response => console.log(response)) /* review was created successfully */
-    .catch(error => console.error(error)); /* handle errors */
-
-
-/* SELECT DIV FOR CARD POPULATION */
-function populateBody(dataIn) {
-    console.log(dataIn);
-
-    $('#pop-body').html(createMovieCards(dataIn));
+/* PING GLITCH SERVER */
+function glitchFetch(glitchObject) {
+    fetch(glitchObject)
+        .then(response => response.json())
+        .then(response => populateBody(response)) /* review was created successfully */
+        .catch(error => console.error(error)); /* handle errors */
 }
 
-/* ITERATE THROUGH OBJECTS FUNCTION */
-function createMovieCards(dataIn) {
+/* SELECT DIV FOR IMDB & GLITCH CARD POPULATION */
+function populateBody(dataIn) {
+
+    if (dataIn.results) {
+
+        $('#pop-body-imdb').html(createImdbCards(dataIn));
+
+    } else {
+
+        $('#pop-body-glitch').html(createGlitchCards(dataIn));
+
+    }
+}
+
+/* ITERATE THROUGH IMDB OBJECTS */
+function createImdbCards(dataIn) {
 
     let html = '<div>';
 
     for (let i = 0; i < 5; i++) {
-        html += cardForge(dataIn.results[i]);
+        html += imdbCardForge(dataIn.results[i]);
     }
 
     html += '</div>';
@@ -50,9 +58,27 @@ function createMovieCards(dataIn) {
     return html;
 }
 
-/* CREATE CARDS FUNCTION */
+/* ITERATE THROUGH GLITCH OBJECTS */
+function createGlitchCards(dataIn) {
+
+    // console.log(dataIn);
+
+    let html = '<div>';
+
+    for (let i = 0; i < 5; i++) {
+        html += glitchCardForge(dataIn[i]);
+    }
+
+    html += '</div>';
+
+    return html;
+}
+
+/* CREATE IMDB CARDS */
+
 // language=HTML
-function cardForge(dataIn) {
+function imdbCardForge(dataIn) {
+
     let html = '';
 
     html += `
@@ -72,3 +98,26 @@ function cardForge(dataIn) {
     return html;
 }
 
+/* CREATE IMDB CARDS */
+
+// language=HTML
+function glitchCardForge(dataIn) {
+
+    let html = '';
+
+    html += `
+        <div id="card-parent" class="cards row col-3">
+            <h5>Movie Name: ${dataIn.title}</h5>
+            <div id="p-container" class="col-4">
+                <img src="${dataIn.poster}" alt="movie poster">
+            </div>
+            <ul class="col-5 justify-content-around">
+                <li class="list-item">Rating: ${dataIn.rating}</li>
+                <li>Genre: ${dataIn.genre}</li>
+            </ul>
+            <div>
+            </div>
+        </div>`
+
+    return html;
+}
