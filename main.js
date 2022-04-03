@@ -25,6 +25,12 @@ function glitchFetch(glitchObject) {
         .catch(error => console.error(error)); /* handle errors */
 }
 
+//2nd option loader : https://smallenvelop.com/display-loading-icon-page-loads-completely/
+/*$(window).load(function() {
+    // Animate loader off screen
+    $(".se-pre-con").fadeOut("slow");;
+});*/
+
 /* SELECT DIV FOR IMDB & GLITCH CARD POPULATION */
 function populateBody(dataIn) {
 
