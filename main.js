@@ -6,7 +6,7 @@ const GLITCH_URL = 'https://grape-hill-leo.glitch.me/movies';
 renderPostForm();
 
 /* INVOKE IMDB & GLITCH FETCH FUNCTIONS */
-imdbFetch(IMDB_URL);
+// imdbFetch(IMDB_URL);
 glitchFetch(GLITCH_URL);
 
 /* PING IMDB API */
@@ -137,22 +137,55 @@ function renderPostForm() {
         })
             .then(rez => rez.json())
             .then(data => data)
+            .then(l => location.reload())
             .catch(err => console.log(err));
-    })
 
-    $('#edit-movie').click(function () {
-            let editMovie = {
-                title: $('#btn-edit-movie').val(),
-            }
+        $('#pop-body-glitch').html('');
+        glitchFetch(GLITCH_URL);
+    });
 
 
-        }
-    )
+    $(document).on('click', '.edit-button', function () {
+        let editID = $(this).attr('data-id');
+
+        console.log(typeof(editID));
+        fetch(GLITCH_URL).then(response => response.json()).then(movies => {
+            console.log(movies);
+            movies.forEach((movie) => {
+                console.log(movie.id);
+                if (editID == movie.id) {
+                    $('#actors').val(movie.actors);
+                    $('#director').val(movie.director);
+                    $('#genre').val(movie.genre);
+                    $('#plot').val(movie.plot);
+                    $('#poster').val(movie.poster);
+                    $('#rating').val(movie.rating);
+                    $('#title').val(movie.title);
+                    $('#year').val(movie.year);
+                }
+            })
+        });
+    });
+
+    // $('#btn-edit-movie').click(function () {
+    //     fetch(`${GLITCH_URL}/${$(this).attr('data-id')}`, {
+    //         method: 'PUT',
+    //     body: JSON.stringify({
+    //         title: document.querySelector(‘#edited-title’).value,
+    //         rating: document.querySelector(‘#edit-rating’).value,
+    //         genre: document.querySelector(‘#edit-genre’).value
+    // })
+    //
+    // });
+
     $(document).on('click', '.delete-button', function () {
 
         fetch(`${GLITCH_URL}/${$(this).attr('data-id')}`, {method: 'DELETE'})
             .then(rez => rez.json())
+            .then(l => location.reload())
             .catch(err => console.log(err));
-    })
+
+
+    });
 }
 
