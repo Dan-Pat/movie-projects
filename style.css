@@ -5,12 +5,16 @@ html, body {
     color: #FFFFFF;
 }
 
+#nav-main {
+    z-index: 1;
+}
+
 main {
     height: 100vh;
     width: 100%;
-    /*background: url("img/mobile-wallpaper.png");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: 100%;*/
+    background: url("img/mobile-wallpaper.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
 
 }
 
@@ -25,6 +29,7 @@ main {
 #card-parent {
     width: 100%;
     height: 10em;
+    margin: 120px;
 }
 
 #card {

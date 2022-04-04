@@ -116,7 +116,7 @@ function renderPostForm() {
             </div>
         </div>`
 
-    $('body').prepend(postForm);
+    $('main').prepend(postForm);
     $('#btn-submit-movie').click(function () {
         let newMovie = {
             actors: $('#actors').val(),
