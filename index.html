@@ -31,94 +31,41 @@
 <body>
 <main>
 
-    <nav id="nav-main" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <a class="navbar-brand" href="#">Cinemigos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-            </ul>
+    <nav id="nav-nav-nav" class="navbar navbar-expand-lg navbar-light fixed-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cinemigos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul id="collapse-menu" class="navbar-nav">
+                </ul>
+            </div>
         </div>
     </nav>
+
     <!-- LANDING PAGE -->
-<!--    <section id="landing-parent" class="row justify-content-center align-items-start align-content-center">-->
+    <section id="landing-parent" class="row justify-content-center align-items-start align-content-center">
 
-<!--        <h1 id="landing-h1" class="col-12 d-flex justify-content-center align-items-end"><strong>CINEMIGOS</strong></h1>-->
+        <h1 id="landing-h1" class="col-12 d-flex justify-content-center align-items-end"><strong>CINEMIGOS</strong></h1>
 
-<!--        <div id="landing-div-p" class="col-12 row d-flex justify-content-center align-items-start">-->
-<!--            <p id="landing-p" class="col-12 d-flex justify-content-center align-items-start">Learn Spanish through-->
-<!--                Film!</p>-->
-<!--        </div>-->
+        <div id="landing-div-p" class="col-12 row d-flex justify-content-center align-items-start">
+            <p id="landing-p" class="col-12 d-flex justify-content-center align-items-start">Learn Spanish through
+                Film!</p>
+        </div>
 
-<!--        <div id="landing-div-button-parent" class="col-12 d-flex justify-content-center align-items-start">-->
-<!--            <button id="landing-div-button">Click Here to Enter</button>-->
-<!--        </div>-->
+        <div id="landing-div-button-parent" class="col-12 d-flex justify-content-center align-items-start">
+            <button id="landing-div-button">Click Here to Enter</button>
+        </div>
 
-<!--    </section>-->
+    </section>
 
-    <!-- Slideshow container -->
-<!--    <div id="slideshow-container-imdb" class="slideshow-container">-->
 
-        <!-- Full-width images with number and caption text -->
-        <!--        <div class="mySlides fade">
-                    <div class="numbertext">1 / 3</div>
-                    <div id="slide-1" style="width:100%"></div>
-                    <div class="text">Caption Text</div>
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">2 / 3</div>
-                    <div id="slide-2" style="width:100%"></div>
-                    <div class="text">Caption Two</div>
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">3 / 3</div>
-                    <div id="slide-3" style="width:100%"></div>
-                    <div class="text">Caption Three</div>
-                </div>-->
-
-<!--        <div id="slideshow-container-glitch"></div>-->
-
-<!--        &lt;!&ndash; Next and previous buttons &ndash;&gt;-->
-<!--        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>-->
-<!--        <a class="next" onclick="plusSlides(1)">&#10095;</a>-->
-
-<!--    </div>-->
-
-<!--    <br>-->
-
-<!--    &lt;!&ndash; The dots/circles &ndash;&gt;-->
-<!--    <div style="text-align:center">-->
-<!--        <span class="dot" onclick="currentSlide(1)"></span>-->
-<!--        <span class="dot" onclick="currentSlide(2)"></span>-->
-<!--        <span class="dot" onclick="currentSlide(3)"></span>-->
-<!--    </div>-->
 
 
     <div id="pop-body-imdb"></div>
 
-    <div id="pop-body-glitch"></div>
+    <div id="pop-body-glitch" class="d-flex justify-content-center"></div>
 
 </main>
 <!-- JQUERY 3 -->
