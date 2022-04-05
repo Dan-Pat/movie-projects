@@ -83,40 +83,44 @@ function imdbCardForge(dataIn) {
 // language=HTML
 function glitchCardForge(dataIn) {
 
+
     return `
-        <div id="card-parent" class="cards row col-3">
-            <h5>Movie Name: ${dataIn.title}</h5>
-            <div id="p-container" class="col-4">
-                <img src="${dataIn.poster}" alt="movie poster">
+        <!-- CARD -->
+        <div id="card-parent" class="row col-3 d-flex justify-content-center align-items-center"
+             style="background: url('${dataIn.poster}'); background-size: cover; background-repeat: no-repeat;">
+            <div class="hide">
+                <h5>${dataIn.title}</h5>
+                <ul class="col-12">
+                    <li class="list-item">Rating: ${dataIn.rating}</li>
+                    <li>Genre: ${dataIn.genre}</li>
+                </ul>
+                <div class="d-flex justify-content-around">
+                    <a href="#actors" class="edit-button" data-id=${dataIn.id} type="button">edit movie</a>
+                    <button data-id=${dataIn.id} type='button' class='delete-button'>delete</button>
+                </div>
             </div>
-            <ul class="col-5 justify-content-around">
-                <li class="list-item">Rating: ${dataIn.rating}</li>
-                <li>Genre: ${dataIn.genre}</li>
-            </ul>
-            <a href="#actors" class="edit-button" data-id=${dataIn.id} type="button">edit movie</a>
-            <button data-id=${dataIn.id} type='button' class='delete-button'>delete</button>
         </div>`
 }
 
 //language=HTML
 function renderPostForm() {
     let postForm = `
-        <div>
-            <div class="row m-3" style="max-width: 50%">
-                <input class="col-6 m-2" type="text" id="actors" placeholder="actors">
-                <input class="col-6 m-2" type="text" id="director" placeholder="director">
-                <input class="col-6 m-2" type="text" id="genre" placeholder="genre">
-                <input class="col-6 m-2" type="text" id="plot" placeholder="plot">
-                <input class="col-6 m-2" type="text" id="poster" placeholder="poster">
-                <input class="col-6 m-2" type="text" id="rating" placeholder="rating">
-                <input class="col-6 m-2" type="text" id="title" placeholder="title">
-                <input class="col-6 m-2" type="text" id="year" placeholder="year">
+        <div class="d-flex justify-content-center">
+            <div class="row m-3" style="max-width: 100%">
+                <input class="col-3 m-2" type="text" id="actors" placeholder="actors">
+                <input class="col-3 m-2" type="text" id="director" placeholder="director">
+                <input class="col-3 m-2" type="text" id="genre" placeholder="genre">
+                <input class="col-3 m-2" type="text" id="plot" placeholder="plot">
+                <input class="col-3 m-2" type="text" id="poster" placeholder="poster">
+                <input class="col-3 m-2" type="text" id="rating" placeholder="rating">
+                <input class="col-3 m-2" type="text" id="title" placeholder="title">
+                <input class="col-3 m-2" type="text" id="year" placeholder="year">
                 <button id="btn-submit-movie" type="button">add movie</button>
                 <button id="btn-edit-movie" type="button">edit movie</button>
             </div>
         </div>`
 
-    $('main').prepend(postForm);
+    $('#collapse-menu').prepend(postForm);
     $('#btn-submit-movie').click(function () {
         let newMovie = {
             actors: $('#actors').val(),
@@ -140,19 +144,18 @@ function renderPostForm() {
             .then(l => location.reload())
             .catch(err => console.log(err));
 
-        $('#pop-body-glitch').html('');
+        $('#collapse-menu').html('');
         glitchFetch(GLITCH_URL);
     });
 
+    let editID;
 
     $(document).on('click', '.edit-button', function () {
-        let editID = $(this).attr('data-id');
+        editID = $(this).attr('data-id');
 
-        console.log(typeof(editID));
         fetch(GLITCH_URL).then(response => response.json()).then(movies => {
-            console.log(movies);
+
             movies.forEach((movie) => {
-                console.log(movie.id);
                 if (editID == movie.id) {
                     $('#actors').val(movie.actors);
                     $('#director').val(movie.director);
@@ -167,16 +170,32 @@ function renderPostForm() {
         });
     });
 
-    // $('#btn-edit-movie').click(function () {
-    //     fetch(`${GLITCH_URL}/${$(this).attr('data-id')}`, {
-    //         method: 'PUT',
-    //     body: JSON.stringify({
-    //         title: document.querySelector(‘#edited-title’).value,
-    //         rating: document.querySelector(‘#edit-rating’).value,
-    //         genre: document.querySelector(‘#edit-genre’).value
-    // })
-    //
-    // });
+    $('#btn-edit-movie').click(function () {
+        console.log(editID);
+
+        let movieEdit = {
+            actors: $('#actors').val(),
+            director: $('#director').val(),
+            genre: $('#genre').val(),
+            plot: $('#plot').val(),
+            poster: $('#poster').val(),
+            rating: $('#rating').val(),
+            title: $('#title').val(),
+            year: $('#year').val()
+        }
+        fetch(GLITCH_URL + `/${editID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(movieEdit)
+        })
+            .then(rez => rez.json())
+            .catch(err => console.log(err));
+
+        $('#collapse-menu').html('');
+        glitchFetch(GLITCH_URL);
+    });
 
     $(document).on('click', '.delete-button', function () {
 
