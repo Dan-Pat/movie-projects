@@ -21,19 +21,21 @@ main {
     font-family: 'Red Hat Mono', monospace;
 }
 
+
 #landing-h1 {
-    margin: 3.5em 0 0 0;
+    margin: 5em 0 0 0;
 }
 
 #pop-body-glitch {
-    height: inherit;
-    margin: 270px 0 0 0;
+    width: 100%;
+    height: 400px;
+    margin: 255px 0 0 0;
 }
 
 #card-parent {
-    width: 10rem;
-    height: 11em;
-    margin: 10px;
+    width: 12em;
+    height: 9em;
+    margin: 5px;
     color: #FFFFFF;
     border-radius: 40px 40px;
 
@@ -46,13 +48,12 @@ main {
 #card {
     width: 100%;
     border: 5px solid #000000;
-    margin: 10px;
 }
 
 .hide {
     display: none;
     width: 100%;
-    height: 18em;
+    height: 15em;
     padding: 0;
     margin: 0;
     background: rgba(0, 0, 0, 0.80);
@@ -70,6 +71,7 @@ ul {
     width: 100%;
     padding: 0;
     margin: 0 0 25px 0;
+    list-style: none;
 }
 
 li {
