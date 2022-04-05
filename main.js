@@ -34,7 +34,7 @@ function populateBody(dataIn) {
 
     } else {
 
-        $('#pop-body-glitch').html(createGlitchCards(dataIn));
+        $('#pop-body-glitch').append(createGlitchCards(dataIn));
 
     }
 }
@@ -82,13 +82,11 @@ function imdbCardForge(dataIn) {
 
 // language=HTML
 function glitchCardForge(dataIn) {
-
-
     return `
         <!-- CARD -->
-        <div id="card-parent" class="row col-3 d-flex justify-content-center align-items-center"
+        <div id="card-parent" class="row d-flex justify-content-center align-items-center"
              style="background: url('${dataIn.poster}'); background-size: cover; background-repeat: no-repeat;">
-            <div class="hide">
+            <div class="hide row justify-content-center">
                 <h5>${dataIn.title}</h5>
                 <ul class="col-12">
                     <li class="list-item">Rating: ${dataIn.rating}</li>
