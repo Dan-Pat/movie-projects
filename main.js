@@ -1,7 +1,8 @@
 "use strict";
 
 const IMDB_URL = `https://imdb-api.com/API/AdvancedSearch/${IMDB_KEY}?locations=Texas`;
-const GLITCH_URL = 'https://grape-hill-leo.glitch.me/movies';
+// const GLITCH_URL = "https://grape-hill-leo.glitch.me/movies"; // Original URL for Fetch
+const GLITCH_URL = "http://localhost:8080/" // New URL for database integration.
 
 renderPostForm();
 
