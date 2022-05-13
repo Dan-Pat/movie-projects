@@ -83,6 +83,9 @@ function imdbCardForge(dataIn) {
 
 // language=HTML
 function glitchCardForge(dataIn) {
+
+    console.log(dataIn)
+
     return `
         <!-- CARD -->
         <div id="card-parent" class="row d-flex justify-content-center align-items-center"
