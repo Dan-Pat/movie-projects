@@ -8,7 +8,7 @@ renderPostForm();
 
 /* INVOKE IMDB & GLITCH FETCH FUNCTIONS */
 // imdbFetch(IMDB_URL);
-glitchFetch(GLITCH_URL);
+glitchFetch(GLITCH_URL + "api/movies/all");
 
 /* PING IMDB API */
 function imdbFetch(imdbObject) {
@@ -92,6 +92,7 @@ function glitchCardForge(dataIn) {
                 <ul class="col-12">
                     <li class="list-item">Rating: ${dataIn.rating}</li>
                     <li>Genre: ${dataIn.genre}</li>
+                    <li>Actors: ${dataIn.actors.toString()}</li>
                 </ul>
                 <div class="d-flex justify-content-around">
                     <a href="#actors" class="edit-button" data-id=${dataIn.id} type="button">edit movie</a>
